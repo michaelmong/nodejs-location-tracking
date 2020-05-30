@@ -23,7 +23,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // update to match the domain you will make the request from
+    res.header("Access-Control-Allow-Origin", "https://localhost:3000"); // update to match the domain you will make the request from
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 })
@@ -47,6 +47,7 @@ app.route('/')
 
 const mysql = require('mysql');
 const con = mysql.createConnection({
+//    host: '35.240.183.145',
     host: '127.0.0.1',
     user: 'nodejs',
     password: 'O5fbqf4EKO0v3HFg',
@@ -65,9 +66,9 @@ app.route('/api')
 .post((req, res) => {
     let lat = req.body.lat;
     let long = req.body.long;
+    let userID = req.body.id;
 
     if ((lat != 0) && (long != 0)) {
-        let userID = "user1";
         let queryString = "INSERT INTO location(id, latitude, longitude) VALUES('" + userID + "', '" + lat + "', '" + long + "');";
         con.query(queryString, (err, result) => {
             if (err) throw err;
@@ -92,27 +93,4 @@ const httpServer = http.createServer(app);
 const httpsServer = https.createServer(credentials, app);
 
 httpServer.listen(3773, () => console.log('Listening http on port 3773...'));
-httpsServer.listen(443, () => console.log('Listening https on port 443...'));
-
-/*
-
-
-con.query('Select * from authors', (err, rows) => {
-    if (err) throw err;
-
-//    console.log(`Data received from Db: ${rows}`);
-//    console.log(rows);
-
-    rows.forEach((row) => {
-        console.log(`${row.id}. ${row.name} lives in ${row.city}`);
-    });
-})
-
-con.end((err) => console.log('Db connection terminated gracefully.'));
-
-const sequelize = new Sequelize('nodejs', 'nodejs', 'O5fbqf4EKO0v3HFg', {
-    host: '127.0.0.1', 
-    dialect: 'mysql', 
-});
-
-*/
+httpsServer.listen(8443, () => console.log('Listening https on port 8443...'));
