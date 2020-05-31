@@ -87,6 +87,9 @@ app.route('/api')
         .status(200)
         .end();
     }
+})
+.get((req, res) => {
+    
 });
 
 const httpServer = http.createServer(app);
