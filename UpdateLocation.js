@@ -88,8 +88,23 @@ app.route('/api')
         .end();
     }
 })
+
+app.route('/api/:id')
 .get((req, res) => {
-    
+    let userID = req.params.id;
+
+    let queryString = "SELECT * from location WHERE id = '" + userID + "' ORDER BY time DESC LIMIT 1";
+    console.log(queryString);
+    con.query(queryString, (err, result) => {
+        if (err) throw err;
+        console.log("1 record queried.", result[0].time);
+    })
+
+    res
+    .send(result)
+    .status(200)
+    .end();
+
 });
 
 const httpServer = http.createServer(app);
