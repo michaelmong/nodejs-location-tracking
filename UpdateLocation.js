@@ -47,11 +47,12 @@ app.route('/')
 
 const mysql = require('mysql');
 const con = mysql.createConnection({
-//    host: '35.240.183.145',
-    host: '127.0.0.1',
+    host: '35.240.183.145',
+//    host: '127.0.0.1',
     user: 'nodejs',
     password: 'O5fbqf4EKO0v3HFg',
-    database: 'nodejs',
+    database: 'tracking',
+//    database: 'nodejs',
 });
 
 con.connect((err) => {
@@ -69,7 +70,8 @@ app.route('/api')
     let userID = req.body.id;
 
     if ((lat != 0) && (long != 0)) {
-        let queryString = "INSERT INTO location(id, latitude, longitude) VALUES('" + userID + "', '" + lat + "', '" + long + "');";
+        let queryString = "INSERT INTO location(userid, latitude, longitude) VALUES('" + userID + "', '" + lat + "', '" + long + "');";
+//        let queryString = "INSERT INTO location(id, latitude, longitude) VALUES('" + userID + "', '" + lat + "', '" + long + "');";
         con.query(queryString, (err, result) => {
             if (err) throw err;
             console.log("1 record inserted.");
@@ -94,10 +96,11 @@ app.route('/api/:id')
 .get((req, res) => {
     let userID = req.params.id;
 
-    let queryString = "SELECT * from location WHERE id = '" + userID + "' ORDER BY time DESC LIMIT 1";
+    let queryString = "SELECT * from location WHERE userid = '" + userID + "' ORDER BY created_at DESC LIMIT 1";
+//    let queryString = "SELECT * from location WHERE id = '" + userID + "' ORDER BY time DESC LIMIT 1";
     con.query(queryString, (err, result) => {
         if (err) throw err;
-        console.log("1 record queried.", result[0].time);
+        console.log("1 record queried.");
         newLocation = result[0];
     })
 
