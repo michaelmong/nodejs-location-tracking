@@ -114,5 +114,5 @@ app.route('/api/:id')
 const httpServer = http.createServer(app);
 const httpsServer = https.createServer(credentials, app);
 
-httpServer.listen(3773, () => console.log('Listening http on port 3773...'));
-httpsServer.listen(8443, () => console.log('Listening https on port 8443...'));
+httpServer.listen(8080, () => console.log('Listening http on port 8080...'));
+httpsServer.listen(8088, () => console.log('Listening https on port 8088...'));
