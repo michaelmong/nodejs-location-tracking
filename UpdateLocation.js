@@ -47,7 +47,7 @@ app.route('/')
 
 const mysql = require('mysql');
 const con = mysql.createConnection({
-    host: '35.240.183.145',
+    host: '10.148.0.2',
 //    host: '127.0.0.1',
     user: 'nodejs',
     password: 'O5fbqf4EKO0v3HFg',
