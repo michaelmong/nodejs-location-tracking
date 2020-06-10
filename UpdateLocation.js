@@ -74,7 +74,7 @@ app.route('/api')
 //        let queryString = "INSERT INTO location(id, latitude, longitude) VALUES('" + userID + "', '" + lat + "', '" + long + "');";
         con.query(queryString, (err, result) => {
             if (err) throw err;
-            console.log("1 record inserted.");
+            console.log("1 record inserted for", userID);
         })
 
         res
